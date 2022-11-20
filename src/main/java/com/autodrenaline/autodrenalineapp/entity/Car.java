@@ -64,5 +64,4 @@ public class Car {
     public void setMileage(int mileage) {
         this.mileage = mileage;
     }
-
 }
