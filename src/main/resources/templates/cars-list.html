@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars List | Management Panel</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<h1>Cars List</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Model</th>
+        <th scope="col">Brand</th>
+        <th scope="col">Year of production</th>
+        <th scope="col">Mileage</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="car : ${cars}">
+        <td th:text="${car.model}"></td>
+        <td th:text="${car.brand}"></td>
+        <td th:text="${car.year}"></td>
+        <td th:text="${car.mileage}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
