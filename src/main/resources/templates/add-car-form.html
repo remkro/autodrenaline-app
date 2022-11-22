@@ -8,7 +8,7 @@
 <body>
 <div class="container">
 <h1>Add car form</h1>
-<form action="#" th:object="${car}" method="POST">
+<form action="#" th:action="@{/management/cars/save}" th:object="${car}" method="POST">
     <input type="text" class="form-control mb-4 col-4" th:field="*{model}" placeholder="Model">
     <input type="text" class="form-control mb-4 col-4" th:field="*{brand}" placeholder="Brand">
     <input type="text" class="form-control mb-4 col-4" th:field="*{year}" placeholder="Year of production">
