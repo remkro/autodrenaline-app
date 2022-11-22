@@ -7,22 +7,27 @@ import javax.persistence.Id;
 
 @Entity
 public class Car {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String model;
     private String brand;
-    private short year;
+    private String model;
+    private short horsePower;
+    private short yearOfProduction;
     private int mileage;
+    boolean currentlyAvailable;
 
     public Car() {
     }
 
-    public Car(String model, String brand, short year, int mileage) {
-        this.model = model;
+    public Car(String brand, String model, short horsePower, short yearOfProduction, int mileage, boolean currentlyAvailable) {
         this.brand = brand;
-        this.year = year;
+        this.model = model;
+        this.horsePower = horsePower;
+        this.yearOfProduction = yearOfProduction;
         this.mileage = mileage;
+        this.currentlyAvailable = currentlyAvailable;
     }
 
     public long getId() {
@@ -33,14 +38,6 @@ public class Car {
         this.id = id;
     }
 
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
     public String getBrand() {
         return brand;
     }
@@ -49,12 +46,28 @@ public class Car {
         this.brand = brand;
     }
 
-    public short getYear() {
-        return year;
+    public String getModel() {
+        return model;
     }
 
-    public void setYear(short year) {
-        this.year = year;
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public short getHorsePower() {
+        return horsePower;
+    }
+
+    public void setHorsePower(short horsePower) {
+        this.horsePower = horsePower;
+    }
+
+    public short getYearOfProduction() {
+        return yearOfProduction;
+    }
+
+    public void setYearOfProduction(short yearOfProduction) {
+        this.yearOfProduction = yearOfProduction;
     }
 
     public int getMileage() {
@@ -64,4 +77,13 @@ public class Car {
     public void setMileage(int mileage) {
         this.mileage = mileage;
     }
+
+    public boolean isCurrentlyAvailable() {
+        return currentlyAvailable;
+    }
+
+    public void setCurrentlyAvailable(boolean currentlyAvailable) {
+        this.currentlyAvailable = currentlyAvailable;
+    }
+
 }

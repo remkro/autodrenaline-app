@@ -20,8 +20,8 @@ public class ManagementCarController {
 
     @PostConstruct
     public void init() {
-        cars.add(new Car("488 GTB", "Ferrari", (short) 2015, 50_000));
-        cars.add(new Car("Huracan STO", "Lamborghini", (short) 2021, 8_000));
+        cars.add(new Car("Ferrari", "488 GTB", (short) 520, (short) 2015, 50_000, true));
+        cars.add(new Car("Lamborghini", "Huracan STO", (short) 580, (short) 2021, 8_000, true));
     }
 
     @GetMapping("/add")
