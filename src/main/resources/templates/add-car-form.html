@@ -11,9 +11,13 @@
     <h1>Add car form</h1>
     <hr>
     <form action="#" th:action="@{/management/cars/save}" th:object="${car}" method="POST">
+        <label class="form-label">Model</label>
         <input type="text" class="form-control mb-4 col-4" th:field="*{model}" placeholder="Model">
+        <label class="form-label">Brand</label>
         <input type="text" class="form-control mb-4 col-4" th:field="*{brand}" placeholder="Brand">
+        <label class="form-label">Year of production</label>
         <input type="text" class="form-control mb-4 col-4" th:field="*{year}" placeholder="Year of production">
+        <label class="form-label">Mileage</label>
         <input type="text" class="form-control mb-4 col-4" th:field="*{mileage}" placeholder="Mileage">
         <button type="submit" class="btn btn-info col-2">Save</button>
     </form>
