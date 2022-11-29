@@ -1,6 +1,7 @@
 package com.autodrenaline.autodrenalineapp.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -20,8 +21,8 @@ public class User {
     @Transient
     private String passwordConfirm;
 
-    @ManyToMany
-    private Set<Role> roles;
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    private Set<Role> roles = new HashSet<>();
 
     public long getId() {
         return id;
@@ -61,6 +62,10 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public void addRole(Role role) {
+        roles.add(role);
     }
 
 }

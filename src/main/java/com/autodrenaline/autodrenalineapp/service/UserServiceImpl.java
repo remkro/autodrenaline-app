@@ -1,5 +1,6 @@
 package com.autodrenaline.autodrenalineapp.service;
 
+import com.autodrenaline.autodrenalineapp.entity.Role;
 import com.autodrenaline.autodrenalineapp.entity.User;
 import com.autodrenaline.autodrenalineapp.repository.RoleRepository;
 import com.autodrenaline.autodrenalineapp.repository.UserRepository;
@@ -25,7 +26,8 @@ public class UserServiceImpl implements UserService {
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 //        user.setPassword(user.getPassword());
-        user.setRoles(new HashSet<>(roleRepository.findAll()));
+//        user.setRoles(new HashSet<>(roleRepository.findAll()));
+        user.addRole(new Role("USER"));
         userRepository.save(user);
     }
 
