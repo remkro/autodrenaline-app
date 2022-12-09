@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/management/cars")
+@RequestMapping("/management/fleet")
 @RequiredArgsConstructor
 public class ManagementCarController {
 
@@ -35,14 +35,14 @@ public class ManagementCarController {
     @PostMapping("/save")
     public String saveCar(@ModelAttribute("car") Car car) {
         carManagementService.save(car);
-        return "redirect:/management/cars/list";
+        return "redirect:/management/fleet";
     }
 
-    @GetMapping("/list")
+    @GetMapping()
     public String getCarsList(Model model) {
         final List<Car> cars = carManagementService.getAll();
         model.addAttribute("cars", cars);
-        return "cars-list";
+        return "fleet";
     }
 
 }
