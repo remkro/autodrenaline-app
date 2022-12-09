@@ -2,6 +2,7 @@ package com.autodrenaline.autodrenalineapp.controller;
 
 import com.autodrenaline.autodrenalineapp.entity.Car;
 import com.autodrenaline.autodrenalineapp.service.CarManagementService;
+import com.autodrenaline.autodrenalineapp.service.StatisticsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import java.util.List;
 public class ManagementCarController {
 
     private final CarManagementService carManagementService;
+    private final StatisticsService statisticsService;
 
 //    @PostConstruct
 //    public void init() {
@@ -41,7 +43,9 @@ public class ManagementCarController {
     @GetMapping()
     public String getCarsList(Model model) {
         final List<Car> cars = carManagementService.getAll();
+        final long amount = statisticsService.getTotalCarsAmount();
         model.addAttribute("cars", cars);
+        model.addAttribute("amount", amount);
         return "fleet";
     }
 

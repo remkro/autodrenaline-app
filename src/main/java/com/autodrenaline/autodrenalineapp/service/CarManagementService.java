@@ -14,7 +14,7 @@ public class CarManagementService {
 
     private final CarRepository carRepository;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Car> getAll() {
         return carRepository.findAll();
     }
