@@ -13,7 +13,7 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @OneToOne
-    private Customer customer;
+    private Client customer;
     @OneToOne
     private Car car;
     private LocalDate date;
@@ -21,7 +21,7 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(Customer customer, Car car, LocalDate date) {
+    public Reservation(Client customer, Car car, LocalDate date) {
         this.customer = customer;
         this.car = car;
         this.date = date;
@@ -35,11 +35,11 @@ public class Reservation {
         this.id = id;
     }
 
-    public Customer getCustomer() {
+    public Client getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(Client customer) {
         this.customer = customer;
     }
 
