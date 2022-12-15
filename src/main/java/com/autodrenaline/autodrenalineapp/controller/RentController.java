@@ -1,5 +1,6 @@
 package com.autodrenaline.autodrenalineapp.controller;
 
+import com.autodrenaline.autodrenalineapp.dto.CreateRentEventDto;
 import com.autodrenaline.autodrenalineapp.entity.Car;
 import com.autodrenaline.autodrenalineapp.entity.RentEvent;
 import com.autodrenaline.autodrenalineapp.service.CarManagementService;
@@ -29,14 +30,15 @@ public class RentController {
 
         List<Car> cars = carService.getAll();
 
-        model.addAttribute("rentForm", new RentEvent());
+        model.addAttribute("rentForm", new CreateRentEventDto());
         model.addAttribute("cars", cars);
 
         return "rent-car";
     }
 
     @PostMapping("/rent")
-    public String postRentForm(@ModelAttribute("rentForm") RentEvent event, Principal principal, BindingResult bindingResult) {
+    public String postRentForm(@ModelAttribute("rentForm") CreateRentEventDto createEvent, BindingResult bindingResult,
+                               Principal principal) {
 //        userValidator.validate(userForm, bindingResult);
 
 //        if (bindingResult.hasErrors()) {
@@ -46,7 +48,7 @@ public class RentController {
 //        userService.save(userForm);
 //        securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
         System.out.println(principal.getName());
-        rentService.rent(2,1);
+        rentService.rent(createEvent, principal.getName());
 
         return "redirect:/rent-confirmation";
     }

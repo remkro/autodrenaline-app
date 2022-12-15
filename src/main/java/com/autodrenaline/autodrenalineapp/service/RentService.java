@@ -1,5 +1,6 @@
 package com.autodrenaline.autodrenalineapp.service;
 
+import com.autodrenaline.autodrenalineapp.dto.CreateRentEventDto;
 import com.autodrenaline.autodrenalineapp.entity.Car;
 import com.autodrenaline.autodrenalineapp.entity.Client;
 import com.autodrenaline.autodrenalineapp.entity.RentEvent;
@@ -22,15 +23,16 @@ public class RentService {
     private final RentEventRepository rentEventRepository;
 
     @Transactional
-    public void rent(long clientId, long carId) {
-        Client client = clientRepository.findById(clientId).orElseThrow(() -> new IllegalArgumentException("Client not found"));
-        Car car = carRepository.findById(carId).orElseThrow(() -> new IllegalArgumentException("Car not found"));
+    public void rent(CreateRentEventDto createRentEventDto, String clientUsername) {
+//        Client client = clientRepository.findById(clientId).orElseThrow(() -> new IllegalArgumentException("Client not found"));
+        Client client = clientRepository.findByUsername(clientUsername);
+        Car car = carRepository.findById(createRentEventDto.getCarId()).orElseThrow(() -> new IllegalArgumentException("Car not found"));
         RentEvent event = new RentEvent();
         event.setClient(client);
         event.setCar(car);
         event.setCreatedAt(LocalDateTime.now());
         event.setStartDate(LocalDate.now());
-        event.setDuration(5);
+        event.setDuration(createRentEventDto.getDuration());
         event.setIncome(BigDecimal.valueOf(5000));
         rentEventRepository.saveAndFlush(event);
     }

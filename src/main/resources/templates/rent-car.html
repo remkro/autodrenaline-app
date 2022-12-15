@@ -17,19 +17,19 @@
         <form method="POST" class="form-signin" th:object="${rentForm}" th:action="@{/rent}">
             <h2 class="form-signin-heading">Create your account</h2>
             <div class="form-group mb-3">
-                <select class="form-control" id="dropDownList">
+                <select class="form-control" th:field="*{carId}">
                 <option value="0">select option</option>
-                <option th:each="car : ${cars}" th:value="${car}" th:text="${car.brand + ' ' + car.model}"></option>
+                <option th:each="car : ${cars}" th:value="${car.id}" th:text="${car.brand + ' ' + car.model}"></option>
                 </select>
 <!--                <input type="text" th:field="*{username}" class="form-control" placeholder="Username"-->
 <!--                       autofocus="true">-->
 <!--                <span class="has-error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>-->
             </div>
 
-<!--            <div class="form-group mb-3">-->
-<!--                <input type="password" th:field="*{password}" class="form-control" placeholder="Password">-->
+            <div class="form-group mb-3">
+                <input type="number" th:field="*{duration}" class="form-control">
 <!--                <span class="has-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>-->
-<!--            </div>-->
+            </div>
 
 <!--            <div class="form-group mb-3">-->
 <!--                <input type="password" th:field="*{passwordConfirm}" class="form-control"-->
