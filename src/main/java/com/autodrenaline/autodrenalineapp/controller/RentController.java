@@ -1,6 +1,8 @@
 package com.autodrenaline.autodrenalineapp.controller;
 
+import com.autodrenaline.autodrenalineapp.entity.Car;
 import com.autodrenaline.autodrenalineapp.entity.RentEvent;
+import com.autodrenaline.autodrenalineapp.service.CarManagementService;
 import com.autodrenaline.autodrenalineapp.service.RentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -11,11 +13,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class RentController {
     private final RentService rentService;
+    private final CarManagementService carService;
 
     @GetMapping("/rent")
     public String getRentForm(Model model) {
@@ -23,7 +27,10 @@ public class RentController {
 //            return "redirect:/";
 //        }
 
+        List<Car> cars = carService.getAll();
+
         model.addAttribute("rentForm", new RentEvent());
+        model.addAttribute("cars", cars);
 
         return "rent-car";
     }
