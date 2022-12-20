@@ -8,15 +8,11 @@ import java.util.Set;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "users")
 public class User {
-
-    //https://hellokoding.com/spring-security-login-logout-thymeleaf/
-
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
 
     private String username;
-
     private String password;
 
     @Transient
