@@ -15,9 +15,10 @@
 <div class="container-fluid text-center">
     <div class="reg-box shadow rounded">
         <form method="POST" class="form-signin" th:object="${rentForm}" th:action="@{/rent}">
-            <h2 class="form-signin-heading">Create your account</h2>
+            <h2 class="form-signin-heading">Rent your dream car</h2>
             <div class="form-group mb-3">
-                <select class="form-control" th:field="*{carId}">
+                <label for="car-select">Select your car:</label>
+                <select id="car-select" class="form-control" th:field="*{carId}">
                 <option value="0">select option</option>
                 <option th:each="car : ${cars}" th:value="${car.id}" th:text="${car.brand + ' ' + car.model}"></option>
                 </select>
@@ -25,14 +26,15 @@
 <!--                       autofocus="true">-->
 <!--                <span class="has-error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>-->
             </div>
-
             <div class="form-group mb-3">
-                <input type="number" th:field="*{duration}" class="form-control">
-<!--                <span class="has-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>-->
+                <label for="start-date">When do you want to pick up the car?</label>
+                <input type="date" id="start-date" th:field="*{startDate}" class="form-control">
+                <!--                <span class="has-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>-->
             </div>
-
             <div class="form-group mb-3">
-                <input type="date" th:field="*{startDate}" class="form-control">
+                <label for="rental-period">For how many day do you want to rent?</label>
+                <input type="number" id="rental-period" th:field="*{duration}" class="form-control">
+
                 <!--                <span class="has-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>-->
             </div>
 
