@@ -11,6 +11,7 @@ public class Client extends User {
     private String lastName;
     private String email;
     private LocalDate birthdayDate;
+    private int discountRate;
 
     public Client() {
     }
@@ -45,5 +46,13 @@ public class Client extends User {
 
     public void setBirthdayDate(LocalDate birthdayDate) {
         this.birthdayDate = birthdayDate;
+    }
+
+    public int getDiscountRate() {
+        return discountRate;
+    }
+
+    public void setDiscountRate(Integer discountRate) {
+        this.discountRate = discountRate;
     }
 }
