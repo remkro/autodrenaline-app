@@ -1,5 +1,6 @@
 package com.autodrenaline.autodrenalineapp.controller;
 
+import com.autodrenaline.autodrenalineapp.dto.ClientInfoDto;
 import com.autodrenaline.autodrenalineapp.entity.Client;
 import com.autodrenaline.autodrenalineapp.service.ClientService;
 import com.autodrenaline.autodrenalineapp.service.StatisticsService;
@@ -20,7 +21,7 @@ public class ManagementClientController {
 
     @GetMapping()
     public String getClientsList(Model model) {
-        final List<Client> clients = clientService.getAll();
+        final List<ClientInfoDto> clients = clientService.getAllClientsInfo();
         final long clientsAmount = statisticsService.getTotalClientsAmount();
         model.addAttribute("clients", clients);
         model.addAttribute("clientsAmount", clientsAmount);

@@ -136,6 +136,7 @@
                             <th scope="col">Age</th>
                             <th scope="col">Rentals</th>
                             <th scope="col">Discount</th>
+                            <th scope="col">Income generated</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -143,9 +144,10 @@
                             <td th:text="${client.firstName}"></td>
                             <td th:text="${client.lastName}"></td>
                             <td th:text="${client.email}"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0 %</td>
+                            <td th:text="${client.age}"></td>
+                            <td th:text="${client.rentals}"></td>
+                            <td th:text="${client.discountRate}"></td>
+                            <td th:text="${client.income}"></td>
                         </tr>
                         </tbody>
                     </table>

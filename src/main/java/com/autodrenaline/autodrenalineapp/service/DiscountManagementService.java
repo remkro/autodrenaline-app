@@ -37,7 +37,7 @@ public class DiscountManagementService {
                 () -> new EntityNotFoundException("Client not found")
         );
         int discountRate = 0;
-        int totalRentDuration = rentEventRepository.countTotalRentDurationCompletedByCustomer(clientId);
+        int totalRentDuration = rentEventRepository.sumTotalRentDurationCompletedByCustomer(clientId);
         Set<Map.Entry<Integer, Integer>> entries = discountsThresholds.entrySet();
         for (Map.Entry<Integer, Integer> entry : entries) {
             if(totalRentDuration >= entry.getValue())

@@ -1,5 +1,7 @@
 package com.autodrenaline.autodrenalineapp.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDate;
@@ -10,6 +12,7 @@ public class Client extends User {
     private String firstName;
     private String lastName;
     private String email;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthdayDate;
     private int discountRate;
 
