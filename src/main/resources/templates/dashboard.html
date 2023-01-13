@@ -132,18 +132,20 @@
                         <tr>
                             <th scope="col">Tenant</th>
                             <th scope="col">Car</th>
-                            <th scope="col">Period</th>
+                            <th scope="col">Start date</th>
+                            <th scope="col">Duration</th>
                             <th scope="col">Discount</th>
                             <th scope="col">Income</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="car : ${cars}">
-                            <td th:text="${car.brand}"></td>
-                            <td th:text="${car.model}"></td>
-                            <td th:text="${car.horsePower}"></td>
-                            <td th:text="${car.yearOfProduction}"></td>
-                            <td th:text="${car.mileage}"></td>
+                        <tr th:each="rental : ${recentRentals}">
+                            <td th:text="${rental.tenant}"></td>
+                            <td th:text="${rental.car}"></td>
+                            <td th:text="${rental.startDate}"></td>
+                            <td th:text="${rental.duration}"></td>
+                            <td th:text="${rental.discount}"></td>
+                            <td th:text="${rental.income}"></td>
                         </tr>
                         </tbody>
                     </table>

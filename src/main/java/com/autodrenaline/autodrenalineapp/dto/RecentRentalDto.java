@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -12,9 +11,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CreateRentEventDto {
-    private long carId;
-    private int duration;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+public class RecentRentalDto {
+    private String tenant;
+    private String car;
     private LocalDate startDate;
+    private int duration;
+    private int discount;
+    private double income;
 }

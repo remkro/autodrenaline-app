@@ -2,6 +2,7 @@ package com.autodrenaline.autodrenalineapp.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -23,7 +24,9 @@ public class RentEvent {
     private Client client;
 
     private LocalDateTime createdAt;
+
     private LocalDate startDate;
+
     private int duration;
     private BigDecimal income;
 
