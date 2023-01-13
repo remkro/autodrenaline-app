@@ -1,6 +1,8 @@
 package com.autodrenaline.autodrenalineapp.controller;
 
+import com.autodrenaline.autodrenalineapp.dto.RecentRentalDto;
 import com.autodrenaline.autodrenalineapp.entity.User;
+import com.autodrenaline.autodrenalineapp.service.RentService;
 import com.autodrenaline.autodrenalineapp.service.SecurityService;
 import com.autodrenaline.autodrenalineapp.service.UserService;
 import com.autodrenaline.autodrenalineapp.validation.UserValidator;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 //@RequestMapping("/")
@@ -25,6 +29,9 @@ public class UserController {
 
     @Autowired
     private UserValidator userValidator;
+
+    @Autowired
+    private RentService rentService;
 
     @GetMapping("/registration")
     public String registration(Model model) {
@@ -68,6 +75,8 @@ public class UserController {
 
     @GetMapping({"/", "/welcome"})
     public String welcome(Model model) {
+        List<RecentRentalDto> recentRentals = rentService.getRecentRentals();
+        model.addAttribute("recentRentals", recentRentals);
         return "dashboard";
     }
 

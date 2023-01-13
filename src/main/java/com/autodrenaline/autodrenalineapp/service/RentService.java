@@ -1,6 +1,7 @@
 package com.autodrenaline.autodrenalineapp.service;
 
 import com.autodrenaline.autodrenalineapp.dto.CreateRentEventDto;
+import com.autodrenaline.autodrenalineapp.dto.RecentRentalDto;
 import com.autodrenaline.autodrenalineapp.entity.Car;
 import com.autodrenaline.autodrenalineapp.entity.Client;
 import com.autodrenaline.autodrenalineapp.entity.RentEvent;
@@ -9,11 +10,14 @@ import com.autodrenaline.autodrenalineapp.repository.CarRepository;
 import com.autodrenaline.autodrenalineapp.repository.ClientRepository;
 import com.autodrenaline.autodrenalineapp.repository.RentEventRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +26,8 @@ public class RentService {
     private final CarRepository carRepository;
     private final RentEventRepository rentEventRepository;
     private final DiscountManagementService discountManagementService;
+    @Value("${recentRentalsToShowPeriod}")
+    private int recentRentalsToShowPeriod;
 
     @Transactional
     public void rent(CreateRentEventDto createRentEventDto, String clientUsername) {
@@ -43,5 +49,23 @@ public class RentService {
         event.setIncome(rentalCost);
         rentEventRepository.saveAndFlush(event);
         discountManagementService.updateDiscountRate(client.getId());
+    }
+
+    public List<RecentRentalDto> getRecentRentals() {
+        return rentEventRepository.findAllByCreatedAtAfter(LocalDateTime.now().minusDays(recentRentalsToShowPeriod))
+                .stream()
+                .map(this::mapRentEventToRecentRentalDto)
+                .collect(Collectors.toList());
+    }
+
+    private RecentRentalDto mapRentEventToRecentRentalDto(RentEvent rentEvent) {
+        RecentRentalDto recentRentalDto = new RecentRentalDto();
+        recentRentalDto.setTenant(rentEvent.getClient().getFirstName() + " " + rentEvent.getClient().getLastName());
+        recentRentalDto.setCar(rentEvent.getCar().getBrand() + " " + rentEvent.getCar().getModel());
+        recentRentalDto.setStartDate(rentEvent.getStartDate());
+        recentRentalDto.setDuration(rentEvent.getDuration());
+        recentRentalDto.setDiscount(rentEvent.getClient().getDiscountRate());
+        recentRentalDto.setIncome(Double.parseDouble(rentEvent.getIncome().toString()));
+        return recentRentalDto;
     }
 }
