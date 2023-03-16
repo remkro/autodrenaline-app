@@ -1,7 +1,9 @@
 package com.autodrenaline.autodrenalineapp.controller;
 
+import com.autodrenaline.autodrenalineapp.dto.ClientInfoDto;
 import com.autodrenaline.autodrenalineapp.entity.Car;
 import com.autodrenaline.autodrenalineapp.service.CarManagementService;
+import com.autodrenaline.autodrenalineapp.service.ClientService;
 import com.autodrenaline.autodrenalineapp.service.StatisticsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -9,38 +11,30 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/management/fleet")
 @RequiredArgsConstructor
-public class ManagementCarController {
-
+public class AdminDashboardController {
     private final CarManagementService carManagementService;
     private final StatisticsService statisticsService;
+    private final ClientService clientService;
 
-//    @PostConstruct
-//    public void init() {
-//        cars.add(new Car("Ferrari", "488 GTB", (short) 520, (short) 2015, 50_000, true));
-//        cars.add(new Car("Lamborghini", "Huracan STO", (short) 580, (short) 2021, 8_000, true));
-//    }
-
-    @GetMapping("/add")
+    @GetMapping("/admin/dashboard/fleet/add")
     public String getCarAddForm(Model model) {
         Car car = new Car();
         model.addAttribute("car", car);
         return "add-car-form";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/admin/dashboard/fleet/save")
     public String saveCar(@ModelAttribute("car") Car car) {
         carManagementService.save(car);
-        return "redirect:/management/fleet";
+        return "redirect:/admin/dashboard/fleet";
     }
 
-    @GetMapping()
+    @GetMapping("/admin/dashboard/fleet")
     public String getCarsList(Model model) {
         final List<Car> cars = carManagementService.getAll();
         final long amount = statisticsService.getTotalCarsAmount();
@@ -49,4 +43,12 @@ public class ManagementCarController {
         return "fleet";
     }
 
+    @GetMapping("/admin/dashboard/clients")
+    public String getClientsList(Model model) {
+        final List<ClientInfoDto> clients = clientService.getAllClientsInfo();
+        final long clientsAmount = statisticsService.getTotalClientsAmount();
+        model.addAttribute("clients", clients);
+        model.addAttribute("clientsAmount", clientsAmount);
+        return "clients";
+    }
 }

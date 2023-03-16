@@ -1,10 +1,8 @@
 package com.autodrenaline.autodrenalineapp.controller;
 
 import com.autodrenaline.autodrenalineapp.entity.Client;
-import com.autodrenaline.autodrenalineapp.entity.User;
 import com.autodrenaline.autodrenalineapp.service.ClientService;
 import com.autodrenaline.autodrenalineapp.service.SecurityService;
-import com.autodrenaline.autodrenalineapp.service.UserService;
 import com.autodrenaline.autodrenalineapp.validation.UserValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequiredArgsConstructor
-public class ClientController {
+public class ClientRegistrationController {
     private final SecurityService securityService;
     private final ClientService clientService;
     private final UserValidator userValidator;
@@ -34,11 +32,11 @@ public class ClientController {
 
     @PostMapping("/client/registration")
     public String registration(@ModelAttribute("clientForm") Client clientForm, BindingResult bindingResult) {
-//        userValidator.validate(clientForm, bindingResult);
+        userValidator.validate(clientForm, bindingResult);
 
-//        if (bindingResult.hasErrors()) {
-//            return "registration";
-//        }
+        if (bindingResult.hasErrors()) {
+            return "registration";
+        }
 
         clientService.save(clientForm);
         securityService.autoLogin(clientForm.getUsername(), clientForm.getPasswordConfirm());
