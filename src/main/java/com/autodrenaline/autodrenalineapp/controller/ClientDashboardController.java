@@ -2,7 +2,6 @@ package com.autodrenaline.autodrenalineapp.controller;
 
 import com.autodrenaline.autodrenalineapp.dto.CreateRentEventDto;
 import com.autodrenaline.autodrenalineapp.entity.Car;
-import com.autodrenaline.autodrenalineapp.entity.RentEvent;
 import com.autodrenaline.autodrenalineapp.service.CarManagementService;
 import com.autodrenaline.autodrenalineapp.service.RentService;
 import lombok.RequiredArgsConstructor;
@@ -18,11 +17,11 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class RentController {
+public class ClientDashboardController {
     private final RentService rentService;
     private final CarManagementService carService;
 
-    @GetMapping("/rent")
+    @GetMapping("/client/dashboard/rent")
     public String getRentForm(Model model) {
 //        if (securityService.isAuthenticated()) {
 //            return "redirect:/";
@@ -36,7 +35,7 @@ public class RentController {
         return "rent-car";
     }
 
-    @PostMapping("/rent")
+    @PostMapping("/client/dashboard/rent")
     public String postRentForm(@ModelAttribute("rentForm") CreateRentEventDto createEvent, BindingResult bindingResult,
                                Principal principal) {
 //        userValidator.validate(userForm, bindingResult);
@@ -47,13 +46,12 @@ public class RentController {
 //
 //        userService.save(userForm);
 //        securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
-        System.out.println(principal.getName());
         rentService.rent(createEvent, principal.getName());
 
         return "redirect:/rent-confirmation";
     }
 
-    @GetMapping("/rent-confirmation")
+    @GetMapping("/client/dashboard/rent-confirmation")
     public String getRentConfirmation() {
         return "rent-confirmation";
     }

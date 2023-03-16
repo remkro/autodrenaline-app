@@ -127,7 +127,7 @@
             <div class="row my-5">
                 <h3 class="fs-4 mb-3">Add Car Form</h3>
                 <div class="col">
-                    <form action="#" th:action="@{/management/fleet/save}" th:object="${car}" method="POST">
+                    <form action="#" th:action="@{/admin/dashboard/fleet/save}" th:object="${car}" method="POST">
                         <label class="form-label">Brand</label>
                         <input type="text" class="form-control mb-4 col-4" th:field="*{brand}" placeholder="Brand">
                         <label class="form-label">Model</label>
@@ -143,7 +143,7 @@
                         <button type="submit" class="btn btn-info col-2">Save</button>
                     </form>
                     <hr>
-                    <a th:href="@{/management/fleet}">Go back to fleet (cars list)</a>
+                    <a th:href="@{/admin/dashboard/fleet}">Go back to fleet (cars list)</a>
 
                 </div>
             </div>

@@ -14,7 +14,7 @@
 <body>
 <div class="container-fluid text-center">
     <div class="reg-box shadow rounded">
-        <form method="POST" class="form-signin" th:object="${userForm}" th:action="@{/registration}">
+        <form method="POST" class="form-signin" th:object="${userForm}" th:action="@{/admin/registration}">
             <h2 class="form-signin-heading">Create your account</h2>
             <div class="form-group mb-3">
                 <input type="text" th:field="*{username}" class="form-control" placeholder="Username"

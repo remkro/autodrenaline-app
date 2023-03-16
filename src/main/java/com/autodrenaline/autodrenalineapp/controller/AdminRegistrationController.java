@@ -4,29 +4,22 @@ import com.autodrenaline.autodrenalineapp.entity.User;
 import com.autodrenaline.autodrenalineapp.service.SecurityService;
 import com.autodrenaline.autodrenalineapp.service.UserService;
 import com.autodrenaline.autodrenalineapp.validation.UserValidator;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-//@RequestMapping("/")
-public class UserController {
+@RequiredArgsConstructor
+public class AdminRegistrationController {
+    private final UserService userService;
+    private final SecurityService securityService;
+    private final UserValidator userValidator;
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private SecurityService securityService;
-
-    @Autowired
-    private UserValidator userValidator;
-
-    @GetMapping("/registration")
+    @GetMapping("/admin/registration")
     public String registration(Model model) {
         if (securityService.isAuthenticated()) {
             return "redirect:/";
@@ -37,7 +30,7 @@ public class UserController {
         return "registration";
     }
 
-    @PostMapping("/registration")
+    @PostMapping("/admin/registration")
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
         userValidator.validate(userForm, bindingResult);
 
@@ -51,7 +44,7 @@ public class UserController {
         return "redirect:/welcome";
     }
 
-    @GetMapping("/login")
+    @GetMapping("/admin/login")
     public String login(Model model, String error, String logout) {
         if (securityService.isAuthenticated()) {
             return "redirect:/";
@@ -70,5 +63,4 @@ public class UserController {
     public String welcome(Model model) {
         return "dashboard";
     }
-
 }
